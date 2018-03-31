@@ -113,6 +113,7 @@ function draw()
 		fill(cpuSnapShot[curSnap][j].state);
 		rect(cpuSnapShot[curSnap][j].x,cpuSnapShot[curSnap][j].y,cpuSnapShot[curSnap][j].width,cpuSnapShot[curSnap][j].height);	
 		fill('blue');
+		if(cpuSnapShot[curSnap][j].pname!="IDLE")
 		text(cpuSnapShot[curSnap][j].pname,(2*cpuSnapShot[curSnap][j].x+cpuSnapShot[curSnap][j].width)/2,(2*cpuSnapShot[curSnap][j].y+80)/2);
 		}	//rect(cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].x,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].y,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].width,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].height);
 		push();
@@ -139,10 +140,10 @@ function drawText(){
   text("SJF (PREEMPTIVE)", 15, 40);
   textSize(20);
   fill(125);
-  text("Action  :",30,windowHeight-40);
+  text("Action  :",30,windowHeight-20);
   fill(125);
   strokeWeight(1);
-  text(msg,150,windowHeight-40);
+  text(msg,150,windowHeight-20);
   if(simulation){
 	fill('#5aaa73');
 	rect(canvasx+500,canvasy+30,50,50);
@@ -385,15 +386,14 @@ function generateTable(){
 			sum_Wt+=pwt[i];
 		}
 	}
-	
+	avgWT = sum_Wt/patQ.length;
+	avgTAT = sum_Tat/patQ.length;
 	for(var i=0;i<tpat.length;i++){
 		if(tpname[i]!="IDLE"){
 		tablee.push(JSON.parse(JSON.stringify([tpname[i],tpat[i],tpbt[i],tpct[i],ptat[i],pwt[i]])));
 		}
 	}
-	tablee.push(JSON.parse(JSON.stringify(["","","","",sum_Tat,sum_Wt])));
-	avgWT = sum_Wt/patQ.length;
-	avgTAT = sum_Tat/patQ.length;
+	tablee.push(JSON.parse(JSON.stringify(["","","","",avgTAT,avgWT])));
 }
 function GenerateTable()
 {
