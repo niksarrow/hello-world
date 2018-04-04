@@ -269,14 +269,14 @@ function createNewProcess()
   i_AT.value('');
   var temp2=i_BT.value();
   i_BT.value('');
-  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100){
+  if(isNaN(temp1) || (temp1)<0 || (temp1)>100){
 	  i_AT.value("Invalid Input");
   }
-   if(isNaN(temp2) || Math(temp2)<=0 || Math(temp2)>100){
+   if(isNaN(temp2) || (temp2)<=0 || (temp2)>100){
 	  i_BT.value("Invalid Input");
 	  return;
   }
-  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100)
+  if(isNaN(temp1) || (temp1)<0 || (temp1)>100)
 	  return;
   if(temp2 > maxBT)
   {
