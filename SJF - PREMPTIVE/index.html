@@ -1,21 +1,126 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<!-- -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="logo1.ico" />
+	<!-- -->
+	
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+	<title>SJF-PREEMPTIVE</title>
     <style> body {padding: 0; margin: 0;} </style>
     <script src="p5.min.js"></script>
     <script src="p5.dom.min.js"></script>
     <script src="p5.sound.min.js"></script>
     <script src="sketch.js"></script>
+	<style>
+  .row {
+    background-color: #e3e3e3;
+    border-radius: 15px;
+}
+
+.col-md-10 {
+    background-color: #f5f3f3;
+}
+</style>
   </head>
   <body>
   <div id="sketch-holder" ,class="container">
   </div>
-  <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      
-	<div id="dvTable">
+  <!-- <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      -->
+	<div id="dvTable" align="center" class="table table-striped table-bordered">
 	</div>
-	<img src="sjf1p.png" width="1490"></img>
-	<img src="sjf2p.png" width="1190"></img>
+	<!--<img src="fcfs.jpg" width="1490"></img>
+	<img src="Capture.png" width="1490"></img> -->
+	<!-- -->
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-1"><p>
+        
+        </p>
+        </div>
+        <div class="col-10 "><br>
+        <h3 align="center">SJF-PREEMPTIVE</h3>
+        
+		<!-- theory-->
+		<h3>Simulation</h3>
+		<ol>
+		<li>CREATE:To Submit New Process.</li> 
+		<li>START :To Start Simulation.</li>
+		<li>RESET :Reset Simulation.</li>
+		<li>GENERATE TABLE:Show Table Summary.</li>
+		<li>PROCESS QUEUE :Process submitted for computation.</li>
+		<li>CPU	:Process Execution.</li>
+		</ol>
+		<h3>Theory</h3>
+		<p><!-- Problem Statement --><br>
+In previous post, we have discussed <a href="https://www.geeksforgeeks.org/program-shortest-job-first-sjf-scheduling-set-1-non-preemptive/">Set 1</a> of SJF i.e. non-preemptive. In this post we will discuss the preemptive version of SJF known as Shortest Remaining Time First (SRTF).</p>
+		<p>In this scheduling algorithm, the process with the smallest amount of time remaining until completion is selected to execute. Since the currently executing process is the one with the shortest amount of time remaining by definition, and since that time should only reduce as execution progresses, processes will always run until they complete or a new process is added that requires a smaller amount of time.</p>
+        <h3>Preemptive SJF: Example</h3>
+		<table width="100%" style="table-layout:fixed;">
+<thead>
+<tr>
+<th style="padding:8px;background-color:#4CB96B;text-align:center;">Process</th>
+<th style="padding:8px;background-color:#4CB96B;text-align:center;">Duration</th>
+<th style="padding:8px;background-color:#4CB96B;text-align:center;">Order</th>
+<th style="padding:8px;background-color:#4CB96B;text-align:center;">Arrival Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">P1</td>
+<td style="text-align:center;">9</td>
+<td style="text-align:center;">1</td>
+<td style="text-align:center;">0</td>
+</tr>
+<tr>
+<td style="background-color:rgba(183,223,182,0.4);text-align:center;">P2</td>
+<td style="background-color:rgba(183,223,182,0.4);text-align:center;">2</td>
+<td style="background-color:rgba(183,223,182,0.4);text-align:center;">2</td>
+<td style="background-color:rgba(183,223,182,0.4);text-align:center;">2</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/Preemptive-SJF-Diagram.png" alt="Preemptive-SJF-Diagram"  class="aligncenter size-full wp-image-198028"></p>
+<p><b>P1 waiting time: 4-2 = 2<br>P2 waiting time: 0<br>The average waiting time(AWT): (0 + 2) / 2 = 1</b></p>
+<p><b>Advantage:</b><br>
+1- Short processes are handled very quickly.<br>
+2- The system also requires very little overhead since it only makes a decision when a process completes or a new process is added.<br>
+3- When a new process is added the algorithm only needs to compare the currently executing process with the new process, ignoring all other processes currently waiting to execute.</p>
+<p><b>Disadvantage:</b><br>
+1- Like shortest job first, it has the potential for process starvation.<br>
+2- Long processes may be held off indefinitely if short processes are continually added.</p>
+<pre><b>Implementation:</b>
+1- Traverse until all process gets completely
+   executed.
+   a) Find process with minimum remaining time at
+     every single time lap.
+   b) Reduce its time by 1.
+   c) Check if its remaining time becomes 0 
+   d) Increment the counter of process completion.
+   e) Completion time of current process = 
+     current_time +1;
+   e) Calculate waiting time for each completed 
+     process.
+   wt[i]= Completion time - arrival_time-burst_time
+   f)Increment time lap by one.
+2- Find turnaround time (waiting_time+burst_time).
+</pre>
+		
+		<p align="right" >Theory source :<a href="https://www.geeksforgeeks.org/program-shortest-job-first-scheduling-set-2srtf-make-changesdoneplease-review/">/geeksforgeeks/sjfp</a> </p>
+        </div>
+        <div class="col-1">
+        
+        </div>
+      </div>
+      <hr>
+    </div>
+	<!-- -->
  
   </body>
+
 </html>

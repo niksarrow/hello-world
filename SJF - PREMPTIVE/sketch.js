@@ -16,6 +16,7 @@ var n=0,n_cpu=0,avgWT=0,avgTAT=0;
 var IsPause,curSnap,simulation=false;
 var cpuSnapShot = [],cpuStatus = [],timeSnapShot =[],tablee = [];
 var pct=[],ptat=[],pwt=[];
+var i_AT,b_create ,i_Start,b_reset,b_gen,b_exa;
 function f_reset()
 {
   IsPause = true;
@@ -31,38 +32,65 @@ function f_reset()
   pat1.length=0;pbt1.length=0;pname1.length=0;pcol1.length=0;
   msg="Submit New Process."
 	document.getElementById('gen').disabled=true;
-	//document.getElementById('create').disabled=false;
-	//document.getElementById('start').disabled=true;
+	document.getElementById('create').disabled=false;
+	document.getElementById('start').disabled=true;
 }
 
 function setup(){
-  var mycan = createCanvas(window.innerWidth, window.innerHeight);
+  var mycan = createCanvas(window.innerWidth-10, window.innerHeight);
   mycan.parent('sketch-holder');
   
-  f_reset();
+
   i_AT=createInput();
   i_AT.position(canvasx+canvasw+200,110);
   i_BT=createInput();
   i_BT.position(canvasx+canvasw+200,140);
 
   b_create = createButton('CREATE');
-  b_create.position(canvasx+canvasw+400,125);
+  b_create.position(canvasx+canvasw+250,200);
   b_create.mousePressed(createNewProcess);
   b_create.id('create');
 
   i_Start=createButton('START');
-  i_Start.position(canvasx+canvasw+400,180);
+  i_Start.position(canvasx+canvasw+250,250);
   i_Start.mousePressed(startS);
   i_Start.id('start');
   
   b_reset=createButton('RESET');
   b_reset.mousePressed(f_reset);
-  b_reset.position(canvasx+canvasw+460,180);
+  b_reset.position(canvasx+canvasw+250,300);
+    
+  b_gen=createButton('GENERATE TABLE');
+  b_gen.mousePressed(GenerateTable);
+  b_gen.position(canvasx+canvasw+250,650);
+  b_gen.id('gen');
+   b_exa=createButton('EXAMPLE');
+  b_exa.mousePressed(addExample);
+  b_exa.position(canvasx+canvasw+250,350);
+  b_exa.id('example');
   document.getElementById('create').disabled=false;
-  /*document.getElementById('gen').disabled=true;*/
+  document.getElementById('gen').disabled=true;
   document.getElementById('start').disabled=true;
-  f_reset();
   
+  f_reset();
+}
+function addExample()
+{
+  f_reset();
+  pname = ["P0","P1","P2","P3","P4"];
+  pat  = [1,2,3,4,5];
+  pbt  =  [7,5,1,2,8];
+  pcol = ["#f9f9d9","#f2bc91","#c1f190","#8ff0dd","#e2e0e1"];
+  
+  pnameQ = ["P0","P1","P2","P3","P4"];
+  patQ  = [1,2,3,4,5];
+  pbtQ  =  [7,5,1,2,8]
+  pcolQ =  ["#f9f9d9","#f2bc91","#c1f190","#8ff0dd","#e2e0e1"];
+  
+  aryIndex = 6;
+  document.getElementById('start').disabled=false;
+  document.getElementById('create').disabled=true;
+  msg="Submit New Processes. Start Simulation after submitting all processes."	
 }
 function draw()
 {
@@ -118,10 +146,12 @@ function draw()
 		}	//rect(cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].x,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].y,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].width,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].height);
 		push();
 		textSize(25);
+		noStroke();
 		text("Avg TAT : "+avgTAT,canvasx+100,canvasy+50);
 		text("Avg WT  : "+avgWT,canvasx+100,canvasy+150);
 		pop();
 		msg="Simulation Complete.Click GenerateTable."
+		 document.getElementById('example').disabled=false;
    }
    for(var i=0;i<timeSnapShot.length;i++){
 	   fill('#5aaa73');
@@ -134,6 +164,7 @@ function draw()
 }
 function drawText(){
   push();
+  noStroke();
   fill(125);
   textFont('monospace');
   textSize(25);
@@ -242,6 +273,15 @@ function createNewProcess()
   i_AT.value('');
   var temp2=i_BT.value();
   i_BT.value('');
+  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100){
+	  i_AT.value("Invalid Input");
+  }
+   if(isNaN(temp2) || Math(temp2)<=0 || Math(temp2)>100){
+	  i_BT.value("Invalid Input");
+	  return;
+  }
+  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100)
+	  return;
   if(temp2 > maxBT)
   {
     maxBT = temp2;
@@ -359,6 +399,7 @@ function startS()
 	document.getElementById('gen').disabled=false;
 	document.getElementById('create').disabled=true;
 	document.getElementById('start').disabled=true;
+	document.getElementById('example').disabled=true;
 	msg="Simulation Running.";
 }
 function generateTable(){
