@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="logo1.ico" />
+	
+	<script src="p5.min.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="sketch.js"></script>	
+	<title>KNN</title>
+  </head>
+  <body>
+	
+	<div id="sketch-holder" ,class="container">
+    </div>
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-1"><p></p></div>
+        <div class="col-10 "><br>
+        <h3 align="center">k-nearest neighbors</h3>
+        <h4>Simulation</h4>
+			<ul>
+				<li>Enter training data by clicking on webpage.</li>
+				<li>Use 'Change Class' to change class</li>
+				<li>Enter value of K in text field and click on start.</li>
+				<li>Value of K will be incremented automatically if there is a tie.</li>
+			</ul>
+		<br>
+		<h4>Theory</h4>
+		<p>In pattern recognition, the <b><i>k</i>-nearest neighbors algorithm</b> (<b><i>k</i>-NN</b>) is a non-parametric method used for classification and regression In both cases, the input consists of the <i>k</i> closest training examples in the feature space. The output depends on whether <i>k</i>-NN is used for classification or regression:</p>
+		<dl>
+<dd>
+<ul>
+<li>In <i>k-NN classification</i>, the output is a class membership. An object is classified by a majority vote of its neighbors, with the object being assigned to the class most common among its <i>k</i> nearest neighbors (<i>k</i> is a positive integer, typically small). If <i>k</i>&nbsp;=&nbsp;1, then the object is simply assigned to the class of that single nearest neighbor.</li>
+</ul>
+</dd>
+</dl>
+		<dl>
+<dd>
+<ul>
+<li>In <i>k-NN regression</i>, the output is the property value for the object. This value is the average of the values of its <i>k</i> nearest neighbors.</li>
+</ul>
+</dd>
+</dl>
+<p>Both for classification and regression, a useful technique can be to assign weight to the contributions of the neighbors, so that the nearer neighbors contribute more to the average than the more distant ones. For example, a common weighting scheme consists in giving each neighbor a weight of 1/<i>d</i>, where <i>d</i> is the distance to the neighbor.</p>
+
+		<h4>Algorithm</h4>
+		<p>The training examples are vectors in a multidimensional feature space, each with a class label. The training phase of the algorithm consists only of storing the feature vectors and class labels of the training samples.</p>
+		<p>In the classification phase, <i>k</i> is a user-defined constant, and an unlabeled vector (a query or test point) is classified by assigning the label which is most frequent among the <i>k</i> training samples nearest to that query point.</p>
+	   <p>A commonly used distance metric for continuous variables is Euclidean distance. For discrete variables, such as for text classification, another metric can be used, such as the <b>overlap metric</b>. In the context of gene expression microarray data, for example, <i>k</i>-NN has also been employed with correlation coefficients such as Pearson and Spearman.< Often, the classification accuracy of <i>k</i>-NN can be improved significantly if the distance metric is learned with specialized algorithms such as Large Margin Nearest Neighbor or Neighbourhood components analysis.</p>
+	   <p>A drawback of the basic "majority voting" classification occurs when the class distribution is skewed. That is, examples of a more frequent class tend to dominate the prediction of the new example, because they tend to be common among the <i>k</i> nearest neighbors due to their large number. One way to overcome this problem is to weight the classification, taking into account the distance from the test point to each of its <i>k</i> nearest neighbors. The class (or value, in regression problems) of each of the <i>k</i> nearest points is multiplied by a weight proportional to the inverse of the distance from that point to the test point. Another way to overcome skew is by abstraction in data representation. For example, in a self-organizing map (SOM), each node is a representative (a center) of a cluster of similar points, regardless of their density in the original training data. <i>K</i>-NN can then be applied to the SOM.</p>
+	   <p align="right">Theory source : <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm</a></p>
+        </div>
+        <div class="col-1">
+        
+        </div>
+      </div>
+      <hr>
+    </div>
+  </body>
+</html>

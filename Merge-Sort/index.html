@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<!-- -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="logo1.ico" />
+	<!-- -->
+	
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+	<title>MERGE SORT</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="p5.min.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+	<style>
+  .row {
+    background-color: #e3e3e3;
+    border-radius: 15px;
+}
+
+.col-md-10 {
+    background-color: #f5f3f3;
+}
+</style>
+  </head>
+  <body>
+  <div id="sketch-holder" ,class="container">
+  </div>
+  <!-- <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      -->
+	<div id="dvTable" align="center" class="table table-striped table-bordered">
+	</div>
+	<!--<img src="fcfs.jpg" width="1490"></img>
+	<img src="Capture.png" width="1490"></img> -->
+	<!-- -->
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-1"><p>
+        
+        </p>
+        </div>
+        <div class="col-10 "><br>
+        <h3 align="center">MERGE SORT)</h3>
+        
+		<!-- theory-->
+		<h3>Simulation</h3>
+		<ol>
+		<li>RANDOMIZE ARRAY:Generates Random Array Of Length Eight.</li> 
+		<li>START :To Start Simulation.</li>
+		<li>RESET :Reset Simulation.</li>
+		<li>NEXT: Next Step.</li>
+		</ol>
+		<h3>Theory</h3>
+				<div class="thumb tright">
+<h4><span class="mw-headline" id="Algorithm">Algorithm</span></h4>
+<p>Conceptually, a merge sort works as follows:</p>
+<ol>
+<li>Divide the unsorted list into <i>n</i> sublists, each containing 1 element (a list of 1 element is considered sorted).</li>
+<li>Repeatedly <a href="/wiki/Merge_algorithm" title="Merge algorithm">merge</a> sublists to produce new sorted sublists until there is only 1 sublist remaining. This will be the sorted list.</li>
+</ol><table class="infobox" style="width:22em" align="center">
+<caption>Merge sort</caption>
+<tbody><tr>
+<td colspan="2" style="text-align:center"><a href="/wiki/File:Merge-sort-example-300px.gif" class="image"><img alt="Merge-sort-example-300px.gif" src="Merge-sort-example-300px.gif" width="300" height="180" data-file-width="300" data-file-height="180"></a>
+<div>An example of merge sort. First divide the list into the smallest unit (1 element), then compare each element with the adjacent list to sort and merge the two adjacent lists. Finally all the elements are sorted and merged.</div>
+</td>
+</tr>
+<tr>
+<th scope="row">Class</th>
+<td><a href="/wiki/Sorting_algorithm" title="Sorting algorithm">Sorting algorithm</a></td>
+</tr>
+<tr>
+<th scope="row">Data structure</th>
+<td><a href="/wiki/Array_data_structure" title="Array data structure">Array</a></td>
+</tr>
+<tr>
+<th scope="row"><a href="/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst-case performance</a></th>
+<td>O(<i>n</i> log <i>n</i>)</td>
+</tr>
+<tr>
+<th scope="row"><a href="/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Best-case performance</a></th>
+<td>
+<p>O(<i>n</i> log <i>n</i>) typical,</p>
+O(<i>n</i>) natural variant</td>
+</tr>
+<tr>
+<th scope="row"><a href="/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Average performance</a></th>
+<td>O(<i>n</i> log <i>n</i>)</td>
+</tr>
+<tr>
+<th scope="row"><a href="/wiki/Best,_worst_and_average_case" title="Best, worst and average case">Worst-case space complexity</a></th>
+<td>О(<i>n</i>) total with O(<i>n</i>) auxiliary, O(<i>1</i>) auxiliary with linked lists<sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[1]</a></sup></td>
+</tr>
+</tbody></table>
+        <p align="right" >Theory source :<a href="https://en.wikipedia.org/wiki/Merge_sort">/wiki/mergesort</a> </p>
+        </div>
+        <div class="col-1">
+        
+        </div>
+      </div>
+      <hr>
+    </div>
+	<!-- -->
+ 
+  </body>
+</html>
