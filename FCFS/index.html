@@ -1,21 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<!-- -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="logo1.ico" />
+	<!-- -->
+	
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+	<title>FIRST COME FIRST SERVE</title>
     <style> body {padding: 0; margin: 0;} </style>
     <script src="p5.min.js"></script>
     <script src="p5.dom.min.js"></script>
     <script src="p5.sound.min.js"></script>
     <script src="sketch.js"></script>
+	<style>
+  .row {
+    background-color: #e3e3e3;
+    border-radius: 15px;
+}
+
+.col-md-10 {
+    background-color: #f5f3f3;
+}
+</style>
   </head>
   <body>
   <div id="sketch-holder" ,class="container">
   </div>
-  <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      
-	<div id="dvTable">
+  <!-- <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      -->
+	<div id="dvTable" align="center" class="table table-striped table-bordered">
 	</div>
-	<img src="fcfs.jpg" width="1490"></img>
-	<img src="Capture.png" width="1490"></img>
+	<!--<img src="fcfs.jpg" width="1490"></img>
+	<img src="Capture.png" width="1490"></img> -->
+	<!-- -->
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-1"><p>
+        
+        </p>
+        </div>
+        <div class="col-10 "><br>
+        <h3 align="center">FIRST COME FIRST SERVE (FCFS)</h3>
+        
+		<!-- theory-->
+		<h3>Simulation</h3>
+		<ol>
+		<li>CREATE:To Submit New Process.</li> 
+		<li>START :To Start Simulation.</li>
+		<li>RESET :Reset Simulation.</li>
+		<li>GENERATE TABLE:Show Table Summary.</li>
+		<li>PROCESS QUEUE :Process submitted for computation.</li>
+		<li>CPU	:Process Execution.</li>
+		</ol>
+		<h3>Theory</h3>
+		<p><i>First in, first out</i> (<a href="/wiki/FIFO_(computing_and_electronics)" title="FIFO (computing and electronics)">FIFO</a>), also known as <i>first come, first served</i> (FCFS), is the simplest scheduling algorithm. FIFO simply queues processes in the order that they arrive in the ready queue. This is commonly used for a <b><span id="task_queue">task queue</span></b>, for example as illustrated in this section.</p>
+		<ul>
+<li>Since context switches only occur upon process termination, and no reorganization of the process queue is required, scheduling overhead is minimal.</li>
+<li>Throughput can be low, because long processes can be holding CPU, waiting the short processes for a long time (known as convoy effect).</li>
+<li>No starvation, because each process gets chance to be executed after a definite time.</li>
+<li>Turnaround time, waiting time and response time depends on the order of their arrival and can be high for the same reasons above.</li>
+<li>No prioritization occurs, thus this system has trouble meeting process deadlines.</li>
+<li>The lack of prioritization means that as long as every process eventually completes, there is no starvation. In an environment where some processes might not complete, there can be starvation.</li>
+<li>It is based on queuing.</li>
+</ul>
+		
+        <p align="right" >Theory source :<a href="https://en.wikipedia.org/wiki/Scheduling_(computing)">/wiki/Scheduling_(computing)</a> </p>
+        </div>
+        <div class="col-1">
+        
+        </div>
+      </div>
+      <hr>
+    </div>
+	<!-- -->
  
   </body>
 </html>
