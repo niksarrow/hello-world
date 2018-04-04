@@ -10,7 +10,7 @@
 	<!-- -->
 	
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-	<title>Round Robin</title>
+	<title>HRRN</title>
     <style> body {padding: 0; margin: 0;} </style>
     <script src="p5.min.js"></script>
     <script src="p5.dom.min.js"></script>
@@ -44,7 +44,7 @@
         </p>
         </div>
         <div class="col-10 "><br>
-        <h3 align="center">Round Robin</h3>
+        <h3 align="center">HIGHEST RESPONSE RATIO NEXT</h3>
         
 		<!-- theory-->
 		<h3>Simulation</h3>
@@ -57,24 +57,36 @@
 		<li>CPU	:Process Execution.</li>
 		</ol>
 		<h3>Theory</h3>
-		<p>Round Robin is a <a href="http://quiz.geeksforgeeks.org/gate-notes-operating-system-process-scheduling/">CPU scheduling algorithm</a> where each process is assigned a fixed time slot in a cyclic way.</p>
-		<ul>
-<li>It is simple, easy to implement, and starvation-free as all processes get fair share of CPU.</li>
-<li>One of the most commonly used technique in CPU scheduling as a core.</li>
-<li>It is preemptive as processes are assigned CPU only for a fixed slice of time at most.</li>
-<li>The disadvantage of it is more overhead of context switching.</li>
-</ul>
-<p><strong>Illustration:</strong><br>
-<img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/round-robin-1.jpg" alt="round-robin" width="600" height="400" class="alignnone size-full wp-image-141108"></p>
-<p><strong>How to compute below times in Round Robin using a program?</strong></p>
+		<p><br>
+Given n processes with their Arrival times and Burst times, the task is to find average waiting time and average turn around time using HRRN scheduling algorithm.<br>
+The name itself states that we need to find the response ratio of all available processes and select the one with the highest Response Ratio. A process once selected will run till completion.</p>
+		<p><strong>Criteria – Response Ratio</strong><br>
+<strong> Mode – Non-Preemptive</strong></p>
+<pre> Response Ratio = (W + S)/S</pre>
+<p>Here, <strong>W</strong> is the waiting time of the process so far and <strong>S</strong> is the Burst time of the process.</p>
+<p><br><br>
+<strong>Performance of HRRN –</strong></p>
 <ol>
-<li>Completion Time:    Time at which process completes its execution.</li>
-<li>Turn Around Time:   Time Difference between completion time and arrival time.  Turn Around Time = Completion Time – Arrival Time </li>
-<li>Waiting Time(W.T): Time Difference between turn around time and burst time.<br>
-     Waiting Time = Turn Around Time – Burst Time</li>
+<li>Shorter Processes are favoured.</li>
+<li>Aging without service increases ratio, longer jobs can get past shorter jobs.</li>
 </ol>
-<p><em><strong>In this post, we have assumed arrival times as 0, so turn around and completion times are same.</strong></em></p>
-        <p align="right" >Theory source :<a href="https://www.geeksforgeeks.org/program-round-robin-scheduling-set-1/">/geeksforgeeks/rr</a> </p>
+<p><img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/Scheduling-Example.jpg" alt="HRRN Scheduling Example."><br>
+<strong>Gantt Chart –</strong></p>
+<br>
+<p><img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/Gantt-Chart.jpg" alt="HRRN Scheduling Example Soolution"></p>
+<p><strong>Explanation –</strong></p>
+<ul>
+<li>At t = 0 we have only one process available, so A gets scheduled.</li>
+<li>Similarly at t = 3 we have only one process available, so B gets scheduled.</li>
+<li>Now at t = 9 we have 3 processes available, C, D and E. Since, C, D and E were available after 4, 6 and 8 units respectively. Therefore, waiting time for C, D and E are (9 – 4 =)5, (9 – 6 =)3, and (9 – 8 =)1 unit respectively.</li>
+<li>Using the formula given above we calculate the Response Ratios of C, D and E respectively as 2.25, 1.6 and 1.5.</li>
+<li>Clearly C has the highest Response Ratio and so it gets scheduled</li>
+<li>Next at t = 13 we have 2 jobs available D and E.</li>
+<li>Response Ratios of D and E are 2.4 and 3.5 respectively.</li>
+<li>So process E is selected next and process D is selected last.</li>
+</ul>
+		
+        <p align="right" >Theory source :<a href="https://www.geeksforgeeks.org/operating-system-highest-response-ratio-next-hrrn-scheduling/">www.geeksforgeeks.org/hrrn/</a> </p>
         </div>
         <div class="col-1">
         

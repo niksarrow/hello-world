@@ -3,7 +3,6 @@ var canvascol='#5aaa73';//#f4cbcb
 var canvascol=50,canvasx=20,canvasy=90,canvasw=900,canvash=600;
 var lengthTunnel = 0,widthTunnel = 0,tunnelx = 0, tunnely = 0,cpux = 0, cpuy = 0;
 var pname=[],pat=[],pbt=[],pcol=[],pnameQ=[],patQ=[],pbtQ=[],pcolQ=[];
-var tpname=[],tpat=[],tpbt=[],tpcol=[],tpct=[];
 
 var aryIndex = 0;
 var curCpuTime = 0;
@@ -16,9 +15,7 @@ var IsPause,curSnap,simulation=false;
 var cpuSnapShot = [],cpuStatus = [],timeSnapShot =[],tablee = [];
 var pat1 = [],pbt1 = [],pname1 =[],pcol1 =[];
 var pct=[],ptat=[],pwt=[];
-var TQ = 5;
 var i_AT,b_create ,i_Start,b_reset,b_gen,b_exa;
-
 function f_reset()
 {
   IsPause = true;
@@ -28,9 +25,8 @@ function f_reset()
   pname.length=0,pat.length=0,pbt.length=0,pcol.length=0,pnameQ.length=0,patQ.length=0,pbtQ.length=0;
   aryIndex=0, col=7;pat1.length=0,pbt1.length=0,pname1.length=0,pcol1.length=0;
   timeSnapShot.length=0;tablee.length=0;
-  tpname.length=0,tpat.length=0,tpbt.length=0,tpcol.length=0,tpct.length=0;
   lengthTunnel = 0,widthTunnel = 0,tunnelx = 0, tunnely = 0,cpux = 0, cpuy = 0;
-  pct.length=0;ptat.length=0;pwt.length=0,n=0,n_cpu=0,avgWT=0,avgTAT=0;TQ=5;
+  pct.length=0;ptat.length=0;pwt.length=0,n=0,n_cpu=0,avgWT=0,avgTAT=0;
   msg="Submit New Process."
 	document.getElementById('gen').disabled=true;
 	document.getElementById('create').disabled=false;
@@ -45,10 +41,7 @@ function setup(){
   i_AT.position(canvasx+canvasw+200,110);
   i_BT=createInput();
   i_BT.position(canvasx+canvasw+200,140);
-  i_TQ=createInput();
-  i_TQ.position(canvasx+canvasw+200,200);
-  
-  
+
   b_create = createButton('CREATE');
   b_create.position(canvasx+canvasw+400,125);
   b_create.mousePressed(createNewProcess);
@@ -58,23 +51,17 @@ function setup(){
   i_Start.position(canvasx+canvasw+400,180);
   i_Start.mousePressed(startS);
   i_Start.id('start');
-
+  
   b_reset=createButton('RESET');
   b_reset.mousePressed(f_reset);
-  b_reset.position(canvasx+canvasw+460,180);
-    
-   
-  b_gen=createButton('GENERATE TABLE');
+  b_reset.position(canvasx+canvasw+460,180);b_gen=createButton('GENERATE TABLE');
   b_gen.mousePressed(GenerateTable);
   b_gen.position(canvasx+canvasw+260,720);
   b_gen.id('gen');
-  
    b_exa=createButton('EXAMPLE');
   b_exa.mousePressed(addExample);
   b_exa.position(canvasx+canvasw+400,220);
   b_exa.id('example');
-  
-  
   document.getElementById('create').disabled=false;
   document.getElementById('gen').disabled=true;
   document.getElementById('start').disabled=true;
@@ -84,18 +71,17 @@ function setup(){
 function addExample()
 {
   f_reset();
-  TQ=3;
   pname = ["P0","P1","P2","P3","P4"];
-  pat  = [0,0,0];
-  pbt  =  [10,10,10];
-  pcol = ["#f9f9d9","#f2bc91","#c1f190"];
+  pat  = [1,2,3,4,5];
+  pbt  =  [7,5,1,2,8];
+  pcol = ["#f9f9d9","#f2bc91","#c1f190","#8ff0dd","#e2e0e1"];
   
-  pnameQ = ["P0","P1","P2"];
-  patQ  = [0,0,0];
-  pbtQ  =  [10,10,10];
-  pcolQ =  ["#f9f9d9","#f2bc91","#c1f190"];
+  pnameQ = ["P0","P1","P2","P3","P4"];
+  patQ  = [1,2,3,4,5];
+  pbtQ  =  [7,5,1,2,8]
+  pcolQ =  ["#f9f9d9","#f2bc91","#c1f190","#8ff0dd","#e2e0e1"];
   
-  aryIndex = 4;
+  aryIndex = 6;
   document.getElementById('start').disabled=false;
   document.getElementById('create').disabled=true;
   msg="Submit New Processes. Start Simulation after submitting all processes."	
@@ -110,7 +96,6 @@ function draw()
   text('CREATE NEW PROCESS',canvasw+canvasx+41,80);
   text('ARRIVAL TIME',canvasw+canvasx+41,120);
   text('BURST TIME',canvasw+canvasx+41,150);
-  text('TIME QUANTUM',canvasw+canvasx+41,210);
 
   fill(canvascol);
   rect(canvasx,canvasy,canvasw,canvash,20);
@@ -124,7 +109,7 @@ function draw()
   tunnelx = canvasx+canvasw -10;
   tunnely = canvasy + canvasw/2 -190;
   fill('#c90202');
-  text('PROCESSES SUBMITTED', canvasx+10,tunnely - 20);
+  text('PROCESS QUEUE', canvasx+10,tunnely - 20);
 //cpu
   line(canvasx+10,canvasy+canvasw/2,canvasx+canvasw-10,canvasy+canvasw/2);
   line(canvasx+10,canvasy+canvasw/2+100,canvasx+canvasw-10,canvasy+canvasw/2+100);
@@ -154,8 +139,8 @@ function draw()
 		text(cpuSnapShot[curSnap][j].pname,(2*cpuSnapShot[curSnap][j].x+cpuSnapShot[curSnap][j].width)/2,(2*cpuSnapShot[curSnap][j].y+80)/2);
 		}	//rect(cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].x,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].y,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].width,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].height);
 		push();
-		textSize(25);
 		noStroke();
+		textSize(25);
 		text("Avg TAT : "+avgTAT,canvasx+100,canvasy+50);
 		text("Avg WT  : "+avgWT,canvasx+100,canvasy+150);
 		pop();
@@ -177,7 +162,7 @@ function drawText(){
   fill(125);
   textFont('monospace');
   textSize(25);
-  text("Round Robin Scheduling", 15, 40);
+  text("LRTF (NON-PREEMPTIVE)", 15, 40);
   textSize(20);
   fill(125);
   text("Action  :",30,windowHeight-20);
@@ -194,8 +179,6 @@ function drawText(){
 	text("TAT: Turn Around Time",canvasx+500,canvasy+160);
 	text("WT : Waiting Time",canvasx+500,canvasy+180);
   }
-  fill('#5aaa73');
-  text("TQ : Time Quantum = "+TQ,canvasx+500,canvasy+200);
   pop();
 }
 
@@ -266,6 +249,21 @@ function showProcessQueue()
     tunnelx = tunnelx - lbox;
     tunnely = tunnely;
   }
+  for(var i=0;i<patQ.length-1;i=i+1){
+    var min = pbtQ[0],minIndex = i;
+    for(var j=i+1;j<patQ.length;j=j+1){
+      if(pbtQ[j] < pbtQ[minIndex])
+      {
+        min = pbtQ[j];
+        minIndex = j
+      }
+    }//swapping
+	  var temp;
+      temp = patQ[i];patQ[i] = patQ[minIndex];patQ[minIndex] = temp;
+      temp = pnameQ[i];pnameQ[i] = pnameQ[minIndex];pnameQ[minIndex] = temp;
+      temp = pbtQ[i];pbtQ[i] = pbtQ[minIndex];pbtQ[minIndex] = temp;
+	  temp = pcolQ[i];pcolQ[i] = pcolQ[minIndex];pcolQ[minIndex] = temp;
+  }
 }
 function createNewProcess()
 {
@@ -273,28 +271,21 @@ function createNewProcess()
   i_AT.value('');
   var temp2=i_BT.value();
   i_BT.value('');
-  var temp3 = i_TQ.value(); 
-  i_TQ.value('');
-  if(isNaN(temp1) || (temp1)<0 || (temp1)>100){
+  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100){
 	  i_AT.value("Invalid Input");
   }
-   if(isNaN(temp2)|| (temp2)<=0 || (temp2)>100){
+   if(isNaN(temp2) || Math(temp2)<=0 || Math(temp2)>100){
 	  i_BT.value("Invalid Input");
-  }
-  if(!(isNaN(temp3)|| (temp3)<=0|| (temp3)>100)){
-	  TQ = temp3;
-  }
-  if(isNaN(temp1) || (temp1)<0 || (temp1)>100 || isNaN(temp2)|| (temp2)<=0 || (temp2)>100)
 	  return;
-  
- 
-  
+  }
+  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100)
+	  return;
   if(temp2 > maxBT)
   {
     maxBT = temp2;
   }
-  
   pname[aryIndex] = 'P'+aryIndex;
+  
   pat[aryIndex] = Math.abs(temp1);
   pbt[aryIndex] = Math.abs(temp2);
   pcol[aryIndex] = Math.floor(Math.random() * 255);
@@ -310,9 +301,10 @@ function createNewProcess()
   msg="Submit New Processes. Start Simulation after submitting all processes."
 }
 
-function roundRobin()
+function sorting()
 {
-	for(var i=0;i<pat.length-1;i=i+1){
+  //selectionSort
+  for(var i=0;i<pat.length-1;i=i+1){
     var min = pat[0],minIndex = i;
     for(var j=i+1;j<pat.length;j=j+1){
       if(pat[j] < pat[minIndex])
@@ -321,59 +313,44 @@ function roundRobin()
         minIndex = j
       }
     }//swappping
+	  var temp;
       temp = pat[i];pat[i] = pat[minIndex];pat[minIndex] = temp;
       temp = pname[i];pname[i] = pname[minIndex];pname[minIndex] = temp;
       temp = pbt[i];pbt[i] = pbt[minIndex];pbt[minIndex] = temp;
+	  temp = pcolQ[i];pcolQ[i] = pcolQ[minIndex];pcolQ[minIndex] = temp;
   }
-	tpat = JSON.parse(JSON.stringify(pat));
-	tpbt = JSON.parse(JSON.stringify(pbt));
-	tpname=JSON.parse(JSON.stringify(pname));
-	tpcol=JSON.parse(JSON.stringify(pcol));
   var cpu=0;var min;
   for(var i=0,j=0;pat.length>0;i++){
-	  if(pat[i]>cpu)
+	  min=i;
+	  for(var x=i;x<pat.length;x++)
+	  {
+		  if(pat[x]<=cpu)
+		  {
+			if(pbt[x]>pbt[min])
+				min=x;
+		  }
+	  }
+	  if(pat[min]>cpu)
 	  {	  
 			pat1[j] = cpu;
 			pname1[j] = "IDLE";
-			pbt1[j] = pat[i]-cpu;
+			pbt1[j] = pat[min]-cpu;
 			pcol1[j] = '#5aaa73';
 			j++;
-			cpu = cpu + pat[i];
+			cpu = cpu + pat[min];
 			i--;
  	  }
 	  else{
-		  if(pbt[i]<TQ){
-			  min = pbt[i];
-		  }else{
-			  min = TQ;
-		  }
-		  
-		  pat1[j]=pat[i];
-		  pbt1[j]=min;
-		  pname1[j]=pname[i];
-		  pcol1[j]=pcol[i];
-		  //print("hello"+j);
-		  //print("pat1 "+pat1);print("pbt1 "+pbt1);print("pname1 "+pname1);print("pcol1 "+pcol1);
+		  pat1[j]=pat[min];
+		  pbt1[j]=pbt[min];
+		  pname1[j]=pname[min];
+		  pcol1[j]=pcol[min];
 		  j++;
-		  cpu = cpu + min;
-		  pbt[i] = pbt[i] - min;
-		  if(pbt[i]==0){
-		  pat = JSON.parse(JSON.stringify(delEle(pat,i)));
-		  pbt = JSON.parse(JSON.stringify(delEle(pbt,i)));
-		  pname= JSON.parse(JSON.stringify(delEle(pname,i)));
-		  pcol=JSON.parse(JSON.stringify(delEle(pcol,i)));
-		  }
-		  else{
-			  var index = getIndex(pat,cpu);print("index"+index);print("i  "+i);
-			  var val = pat[i];print("val"+val);print("patbefore"+pat);
-			  pat = insert_at(pat,index,val);print("patafter"+pat);
-			  val = pbt[i];
-			  pbt = insert_at(pbt,index,val);
-			  val = pname[i];
-			  pname = insert_at(pname,index,val);
-			  val = pcol[i];
-			  pcol = insert_at(pcol,index,val);
-		  }
+		  cpu = cpu + pbt[min];
+		  pat = delEle(pat,min);print(pat);
+		  pbt = delEle(pbt,min);print(pbt);
+		  pname= delEle(pname,min);
+		  pcol=delEle(pcol,min);
 		  i--;
 	  }	
   }
@@ -383,45 +360,21 @@ function roundRobin()
   pcol=JSON.parse(JSON.stringify(pcol1));
   var bt=0;
   for(var i=0;i<pbt.length;i++){
-		bt = bt + pbt[i];  
+	bt = bt + pbt[i];  
   }
   n_cpu = lengthTunnel/bt; //normalized value
 }
 function delEle(ary,index){
 	var temp=[];
-	temp.length=0;
 		  for(var x=0,j=0;x<ary.length;x++){
 			  if(x!=index)
 				  temp[j++]=ary[x];
 		  }
-	return temp;
-}
-function getIndex(at,cpu){
-	//var temp = [];
-	//temp = delEle(at,0);
-	for(var i=1;i<at.length;i++){
-		if(at[i]>cpu)
-			break;
-	}
-	return i;
-}
-function insert_at(ary,index,val){
-	//insert at ith position
-	var temp=[]
-	for(var j=0,k=0;j<=ary.length;j++){
-		if(index!=j){
-			temp[k++]=ary[j];
-		}
-		else{
-			temp[k++]=val;
-		}
-	}
-	temp = JSON.parse(JSON.stringify(delEle(temp,0)));
-	return temp;
+	return JSON.parse(JSON.stringify(temp));
 }
 function startS()
 {
-	roundRobin();
+	sorting();
 	cpuProcess();
 	IsPause=false;
 	simulation=true;
@@ -436,35 +389,25 @@ function generateTable(){
 	tablee.length=0;
 	tablee.push(["PNo","AT","BT","CT","TAT","WT"]);
 	var sum_Tat = 0;
-	var sum_Wt  = 0;//tpat original,,,,,,pat idle
-	for(var i=0;i<tpat.length;i++){
-		var max;
-		for(var j=0;j<pat.length;j++){
-			if(pname[j]==tpname[i]){
-				max = timeSnapShot[j].time;
-			}
-			if(tpname[i]=="IDLE")
-				break;
-		}
-		tpct[i]=max;
-	}//tpct original
-	for(var i=0;i<tpat.length;i++){
-		if(tpname[i]!="IDLE"){
-		ptat[i] = tpct[i]-tpat[i];
-		pwt[i] = ptat[i]-tpbt[i];
-		
+	var sum_Wt  = 0;
+	for(var i=0;i<pat.length;i++){
+		pct[i]=timeSnapShot[i].time;
+		ptat[i] = pct[i]-pat[i];
+		pwt[i] = ptat[i]-pbt[i];
+		if(pname[i]!="IDLE"){
 			sum_Tat+=ptat[i];
 			sum_Wt+=pwt[i];
 		}
 	}
-	avgWT = sum_Wt/patQ.length;
-	avgTAT = sum_Tat/patQ.length;
-	for(var i=0;i<tpat.length;i++){
-		if(tpname[i]!="IDLE"){
-		tablee.push(JSON.parse(JSON.stringify([tpname[i],tpat[i],tpbt[i],tpct[i],ptat[i],pwt[i]])));
+	for(var i=0;i<pat.length;i++){
+		if(pname[i]!="IDLE"){
+		tablee.push(JSON.parse(JSON.stringify([pname[i],pat[i],pbt[i],pct[i],ptat[i],pwt[i]])));
 		}
 	}
+	avgWT = sum_Wt/patQ.length;
+	avgTAT = sum_Tat/patQ.length;
 	tablee.push(JSON.parse(JSON.stringify(["","","","",avgTAT,avgWT])));
+
 }
 function GenerateTable()
 {

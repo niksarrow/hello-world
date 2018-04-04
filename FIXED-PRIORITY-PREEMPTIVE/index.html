@@ -10,7 +10,7 @@
 	<!-- -->
 	
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-	<title>Round Robin</title>
+	<title>FIXED PRIORITY(PREEMPTIVE)</title>
     <style> body {padding: 0; margin: 0;} </style>
     <script src="p5.min.js"></script>
     <script src="p5.dom.min.js"></script>
@@ -44,7 +44,7 @@
         </p>
         </div>
         <div class="col-10 "><br>
-        <h3 align="center">Round Robin</h3>
+        <h3 align="center">FIXED PRIORITY(PREEMPTIVE)</h3>
         
 		<!-- theory-->
 		<h3>Simulation</h3>
@@ -57,24 +57,16 @@
 		<li>CPU	:Process Execution.</li>
 		</ol>
 		<h3>Theory</h3>
-		<p>Round Robin is a <a href="http://quiz.geeksforgeeks.org/gate-notes-operating-system-process-scheduling/">CPU scheduling algorithm</a> where each process is assigned a fixed time slot in a cyclic way.</p>
+		<p>The operating system assigns a fixed priority rank to every process, and the scheduler arranges the processes in the ready queue in order of their priority. Lower-priority processes get interrupted by incoming higher-priority processes.</p>
 		<ul>
-<li>It is simple, easy to implement, and starvation-free as all processes get fair share of CPU.</li>
-<li>One of the most commonly used technique in CPU scheduling as a core.</li>
-<li>It is preemptive as processes are assigned CPU only for a fixed slice of time at most.</li>
-<li>The disadvantage of it is more overhead of context switching.</li>
+<li>Overhead is not minimal, nor is it significant.</li>
+<li>FPPS has no particular advantage in terms of throughput over FIFO scheduling.</li>
+<li>If the number of rankings is limited, it can be characterized as a collection of FIFO queues, one for each priority ranking. Processes in lower-priority queues are selected only when all of the higher-priority queues are empty.</li>
+<li>Waiting time and response time depend on the priority of the process. Higher-priority processes have smaller waiting and response times.</li>
+<li>Deadlines can be met by giving processes with deadlines a higher priority.</li>
+<li>Starvation of lower-priority processes is possible with large numbers of high-priority processes queuing for CPU time.</li>
 </ul>
-<p><strong>Illustration:</strong><br>
-<img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/round-robin-1.jpg" alt="round-robin" width="600" height="400" class="alignnone size-full wp-image-141108"></p>
-<p><strong>How to compute below times in Round Robin using a program?</strong></p>
-<ol>
-<li>Completion Time:    Time at which process completes its execution.</li>
-<li>Turn Around Time:   Time Difference between completion time and arrival time.  Turn Around Time = Completion Time – Arrival Time </li>
-<li>Waiting Time(W.T): Time Difference between turn around time and burst time.<br>
-     Waiting Time = Turn Around Time – Burst Time</li>
-</ol>
-<p><em><strong>In this post, we have assumed arrival times as 0, so turn around and completion times are same.</strong></em></p>
-        <p align="right" >Theory source :<a href="https://www.geeksforgeeks.org/program-round-robin-scheduling-set-1/">/geeksforgeeks/rr</a> </p>
+        <p align="right" >Theory source :<a href="https://en.wikipedia.org/wiki/Scheduling_(computing)">/wiki/Scheduling_(computing)</a> </p>
         </div>
         <div class="col-1">
         

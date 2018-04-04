@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<!-- -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="logo1.ico" />
+	<!-- -->
+	
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+	<title>LRTF</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="p5.min.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+	<style>
+  .row {
+    background-color: #e3e3e3;
+    border-radius: 15px;
+}
+
+.col-md-10 {
+    background-color: #f5f3f3;
+}
+</style>
+  </head>
+  <body>
+  <div id="sketch-holder" ,class="container">
+  </div>
+  <!-- <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      -->
+	<div id="dvTable" align="center" class="table table-striped table-bordered">
+	</div>
+	<!--<img src="fcfs.jpg" width="1490"></img>
+	<img src="Capture.png" width="1490"></img> -->
+	<!-- -->
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-1"><p>
+        
+        </p>
+        </div>
+        <div class="col-10 "><br>
+        <h3 align="center">LONGEST REMAING TIME FIRST(LRTF)</h3>
+       
+		<!-- theory-->
+		<h3>Simulation</h3>
+		<ol>
+		<li>CREATE:To Submit New Process.</li> 
+		<li>START :To Start Simulation.</li>
+		<li>RESET :Reset Simulation.</li>
+		<li>GENERATE TABLE:Show Table Summary.</li>
+		<li>PROCESS QUEUE :Process submitted for computation.</li>
+		<li>CPU	:Process Execution.</li>
+		</ol>
+		<h3>Theory</h3>
+		<p><b>Earliest deadline first</b> (<b>EDF</b>) or <b>least time to go</b> is a dynamic <a href="/wiki/Scheduling_algorithm" class="mw-redirect" title="Scheduling algorithm">scheduling algorithm</a> used in <a href="/wiki/Real-time_operating_system" title="Real-time operating system">real-time operating systems</a> to place processes in a <a href="/wiki/Priority_queue" title="Priority queue">priority queue</a>. Whenever a scheduling event occurs (task finishes, new task released, etc.) the queue will be searched for the process closest to its deadline. This process is the next to be scheduled for execution.</p>
+		<p>EDF is an <i>optimal</i> scheduling algorithm on preemptive uniprocessors, in the following sense: if a collection of independent <i>jobs,</i> each characterized by an arrival time, an execution requirement and a deadline, can be scheduled (by any algorithm) in a way that ensures all the jobs complete by their deadline, the <b>EDF</b> will schedule this collection of jobs so they all complete by their deadline.</p>
+<p>With scheduling periodic processes that have deadlines equal to their periods, <b>EDF</b> has a utilization bound of 100%. Thus, the <a rel="nofollow" class="external text" href="http://portal.acm.org/citation.cfm?id=78285">schedulability test</a> for <b>EDF</b> is:</p>		
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle U=\sum _{i=1}^{n}{\frac {C_{i}}{T_{i}}}\leq 1,}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>U</mi>
+        <mo>=</mo>
+        <munderover>
+          <mo>∑<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>n</mi>
+          </mrow>
+        </munderover>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <msub>
+              <mi>C</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>i</mi>
+              </mrow>
+            </msub>
+            <msub>
+              <mi>T</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>i</mi>
+              </mrow>
+            </msub>
+          </mfrac>
+        </mrow>
+        <mo>≤<!-- ≤ --></mo>
+        <mn>1</mn>
+        <mo>,</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle U=\sum _{i=1}^{n}{\frac {C_{i}}{T_{i}}}\leq 1,}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8a8a9cf8c953cadbd42b0fab263eab0db56b9664" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.005ex; width:16.829ex; height:6.843ex;" alt="U = \sum_{i=1}^{n} \frac{C_i}{T_i} \leq 1,"></span></dd>
+</dl>
+<p>where the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \left\{C_{i}\right\}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow>
+          <mo>{</mo>
+          <msub>
+            <mi>C</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>i</mi>
+            </mrow>
+          </msub>
+          <mo>}</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \left\{C_{i}\right\}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/390c8d63e9315d6db2b6918ee5d24e29a5319c6c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:4.786ex; height:2.843ex;" alt="\left\{C_i\right\}"></span> are the worst-case computation-times of the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle n}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>n</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle n}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.395ex; height:1.676ex;" alt="n"></span> processes and the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \left\{T_{i}\right\}}">
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow>
+          <mo>{</mo>
+          <msub>
+            <mi>T</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>i</mi>
+            </mrow>
+          </msub>
+          <mo>}</mo>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \left\{T_{i}\right\}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9f9afbd76d0b0c6bd4fad3bd142335969a3f31e5" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:4.482ex; height:2.843ex;" alt="\left\{T_i\right\}"></span> are their respective inter-arrival periods (assumed to be equal to the relative deadlines).</p>
+<p>That is, EDF can guarantee that all deadlines are met provided that the total <a href="/wiki/Central_processing_unit" title="Central processing unit">CPU</a> utilization is not more than 100%. Compared to fixed priority scheduling techniques like <a href="/wiki/Rate-monotonic_scheduling" title="Rate-monotonic scheduling">rate-monotonic scheduling</a>, <b>EDF</b> can guarantee all the deadlines in the system at higher loading.</p>
+        <p align="right" >Theory source :<a href="https://en.wikipedia.org/wiki/Earliest_deadline_first_scheduling">/wiki/LRTF</a> </p>
+        </div>
+        <div class="col-1">
+        
+        </div>
+      </div>
+      <hr>
+    </div>
+	<!-- -->
+ 
+  </body>
+</html>
