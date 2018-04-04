@@ -15,6 +15,7 @@ var IsPause,curSnap,simulation=false;
 var cpuSnapShot = [],cpuStatus = [],timeSnapShot =[],tablee = [];
 var pat1 = [],pbt1 = [],pname1 =[],pcol1 =[];
 var pct=[],ptat=[],pwt=[];
+var i_AT,b_create ,i_Start,b_reset,b_gen,b_exa;
 function f_reset()
 {
   IsPause = true;
@@ -28,15 +29,14 @@ function f_reset()
   pct.length=0;ptat.length=0;pwt.length=0,n=0,n_cpu=0,avgWT=0,avgTAT=0;
   msg="Submit New Process."
 	document.getElementById('gen').disabled=true;
-	//document.getElementById('create').disabled=false;
-	//document.getElementById('start').disabled=true;
+	document.getElementById('create').disabled=false;
+	document.getElementById('start').disabled=true;
 }
 
 function setup(){
   var mycan = createCanvas(window.innerWidth, window.innerHeight);
   mycan.parent('sketch-holder');
   
-  f_reset();
   i_AT=createInput();
   i_AT.position(canvasx+canvasw+200,110);
   i_BT=createInput();
@@ -55,11 +55,35 @@ function setup(){
   b_reset=createButton('RESET');
   b_reset.mousePressed(f_reset);
   b_reset.position(canvasx+canvasw+460,180);
+   b_gen=createButton('GENERATE TABLE');
+  b_gen.mousePressed(GenerateTable);
+  b_gen.position(canvasx+canvasw+260,720);
+  b_gen.id('gen');
+   b_exa=createButton('EXAMPLE');
+  b_exa.mousePressed(addExample);
+  b_exa.position(canvasx+canvasw+400,220);
+  b_exa.id('example');
   document.getElementById('create').disabled=false;
-  /*document.getElementById('gen').disabled=true;*/
-  document.getElementById('start').disabled=true;
+  document.getElementById('gen').disabled=true;
+  document.getElementById('start').disabled=true; f_reset();
+}
+function addExample()
+{
   f_reset();
+  pname = ["P0","P1","P2","P3","P4"];
+  pat  =[1,2,3,4,5];
+  pbt  =  [7,5,1,2,8]
+  pcol = ["#f9f9d9","#f2bc91","#c1f190","#8ff0dd","#e2e0e1"];
   
+  pnameQ = ["P0","P1","P2","P3","P4"];
+  patQ  = [1,2,3,4,5];
+  pbtQ  =  [7,5,1,2,8]
+  pcolQ =  ["#f9f9d9","#f2bc91","#c1f190","#8ff0dd","#e2e0e1"];
+  
+  aryIndex = 6;
+  document.getElementById('start').disabled=false;
+  document.getElementById('create').disabled=true;
+  msg="Submit New Processes. Start Simulation after submitting all processes."	
 }
 function draw()
 {
@@ -114,11 +138,13 @@ function draw()
 		text(cpuSnapShot[curSnap][j].pname,(2*cpuSnapShot[curSnap][j].x+cpuSnapShot[curSnap][j].width)/2,(2*cpuSnapShot[curSnap][j].y+80)/2);
 		}	//rect(cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].x,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].y,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].width,cpuSnapShot[curSnap][cpuSnapShot[curSnap].length-1].height);
 		push();
+		noStroke();
 		textSize(25);
 		text("Avg TAT : "+avgTAT,canvasx+100,canvasy+50);
 		text("Avg WT  : "+avgWT,canvasx+100,canvasy+150);
 		pop();
 		msg="Simulation Complete.Click GenerateTable."
+		 document.getElementById('example').disabled=false;
    }
    for(var i=0;i<timeSnapShot.length;i++){
 	   fill('#5aaa73');
@@ -131,6 +157,7 @@ function draw()
 }
 function drawText(){
   push();
+  noStroke();
   fill(125);
   textFont('monospace');
   textSize(25);
@@ -243,6 +270,15 @@ function createNewProcess()
   i_AT.value('');
   var temp2=i_BT.value();
   i_BT.value('');
+  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100){
+	  i_AT.value("Invalid Input");
+  }
+   if(isNaN(temp2) || Math(temp2)<=0 || Math(temp2)>100){
+	  i_BT.value("Invalid Input");
+	  return;
+  }
+  if(isNaN(temp1) || Math(temp1)<0 || Math(temp1)>100)
+	  return;
   if(temp2 > maxBT)
   {
     maxBT = temp2;
@@ -345,6 +381,7 @@ function startS()
 	document.getElementById('gen').disabled=false;
 	document.getElementById('create').disabled=true;
 	document.getElementById('start').disabled=true;
+	document.getElementById('example').disabled=true;
 	msg="Simulation Running.";
 }
 function generateTable(){

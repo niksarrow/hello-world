@@ -1,21 +1,86 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<!-- -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="logo1.ico" />
+	<!-- -->
+	
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+	<title>SJF</title>
     <style> body {padding: 0; margin: 0;} </style>
     <script src="p5.min.js"></script>
     <script src="p5.dom.min.js"></script>
     <script src="p5.sound.min.js"></script>
     <script src="sketch.js"></script>
+	<style>
+  .row {
+    background-color: #e3e3e3;
+    border-radius: 15px;
+}
+
+.col-md-10 {
+    background-color: #f5f3f3;
+}
+</style>
   </head>
   <body>
   <div id="sketch-holder" ,class="container">
   </div>
-  <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      
-	<div id="dvTable">
+  <!-- <input id="gen" type="button" value="Generate Table" onclick="GenerateTable()" />      -->
+	<div id="dvTable" align="center" class="table table-striped table-bordered">
 	</div>
-	<img src="sjf1.png" width="1490"></img>
-	<img src="sjf2.png" width="1190"></img>
+	<!--<img src="fcfs.jpg" width="1490"></img>
+	<img src="Capture.png" width="1490"></img> -->
+	<!-- -->
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-1"><p>
+        
+        </p>
+        </div>
+        <div class="col-10 "><br>
+        <h3 align="center">SHORTEST JOB FIRST</h3>
+        
+		<!-- theory-->
+		
+<h3>Simulation</h3>
+		<ol>
+		<li>CREATE:To Submit New Process.</li> 
+		<li>START :To Start Simulation.</li>
+		<li>RESET :Reset Simulation.</li>
+		<li>GENERATE TABLE:Show Table Summary.</li>
+		<li>PROCESS QUEUE :Process submitted for computation.</li>
+		<li>CPU	:Process Execution.</li>
+		</ol>
+		<h3>Theory</h3>
+		<p>Shortest job first (SJF) or shortest job next, is a scheduling policy that selects the waiting process with the smallest execution time to execute next. SJN is a non-preemptive algorithm. </p>
+		<ul>
+<li>Shortest Job first has the advantage of having minimum average waiting time among all scheduling algorithms.</li>
+<li>It is a Greedy Algorithm. </li>
+<li>It may cause starvation if shorter processes keep coming. This problem can be solved using the concept of aging.</li>
+<li>It is practically infeasible as Operating System may not know burst time and therefore may not sort them.  While it is not possible to predict execution time, several methods can be used to estimate the execution time for a job, such as a weighted average of previous execution times. SJF can be used in specialized environments where accurate estimates of running time are available.</li>
+</ul>
+<p><strong>Algorithm:</strong></p>
+<pre>1- Sort all the processes in increasing order 
+   according to burst time.
+2- Then simply, apply <a href="https://www.geeksforgeeks.org/program-fcfs-scheduling-set-1/">FCFS</a>.
+</pre>
+<p><img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/SJF1-1.png" alt=""></p>
+		
+        <p align="right" >Theory source :<a href="https://www.geeksforgeeks.org/program-shortest-job-first-sjf-scheduling-set-1-non-preemptive/">/www.geeksforgeeks.org/sjf</a> </p>
+        </div>
+        <div class="col-1">
+        
+        </div>
+      </div>
+      <hr>
+    </div>
+	<!-- -->
  
   </body>
 </html>
