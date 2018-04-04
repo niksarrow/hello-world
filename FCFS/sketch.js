@@ -262,7 +262,7 @@ function createNewProcess()
   if(isNaN(temp1) || (temp1)<0 || (temp1)>100){
 	  i_AT.value("Invalid Input");
   }
-   if(isNaN(temp2) || (temp2)<=0 ||(temp2)>100){
+   if(isNaN(temp2) || (temp2)<=0 || (temp2)>100){
 	  i_BT.value("Invalid Input");
 	  return;
   }
